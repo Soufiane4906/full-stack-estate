@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\api",
+    "\\api\\prisma",
+    "\\client\\src",
+    "\\client\\src\\components",
+    "\\client\\src\\routes\\newPostPage",
+    "\\socket"
+  ],
+  "SelectedNode": "\\api\\app.js",
+  "PreviewInSolutionExplorer": false
+}
