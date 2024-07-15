@@ -7,10 +7,12 @@ import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
+import dataRoute from "./routes/data.route.js"; // Nouvelle ligne
+
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors({ origin: 'http://localhost:5175', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -20,6 +22,7 @@ app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
+app.use("/api/data", dataRoute); 
 
 app.listen(8800, () => {
   console.log("Server is running!");

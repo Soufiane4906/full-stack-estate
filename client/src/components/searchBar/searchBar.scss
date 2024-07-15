@@ -1,30 +1,66 @@
 @import "../../responsive.scss";
 
-.searchBar {
-  .type {
 
+.search-bar {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-    button {
-      padding: 16px 36px;
-      border: 1px solid #999;
-      border-bottom: none;
-      cursor: pointer;
-      background-color: white;
-      text-transform: capitalize;
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
 
-      &.active {
-        background-color: black;
-        color: white;
-      }
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
 
-      &:first-child {
-        border-top-left-radius: 5px;
-        border-right: none;
-      }
-      &:last-child {
-        border-top-right-radius: 5px;
-        border-left: none;
-      }
+  .form-group h6 {
+    margin-bottom: 0.5rem;
+    font-family: 'Arial', sans-serif;
+    color: #666;
+  }
+
+  .select__control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .select__placeholder {
+    color: #999;
+  }
+
+  .select__menu {
+    border-radius: 5px;
+  }
+
+  input[type="time"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
 
@@ -53,6 +89,7 @@
           width: 140px;
         }
       }
+
       @include md {
         width: 200px;
         &:nth-child(2),
@@ -61,7 +98,7 @@
         }
       }
 
-      @include sm{
+      @include sm {
         width: auto;
         &:nth-child(2),
         &:nth-child(3) {
@@ -72,9 +109,9 @@
       }
     }
 
-    a{
+    a {
       flex: 1;
-      background-color: #fece51;
+      background-color: #51fe5a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,12 +119,12 @@
       button {
         border: none;
         cursor: pointer;
-        background-color: #fece51;
-        
-        @include sm{
+        background-color: #51fe5a;
+
+        @include sm {
           padding: 10px;
         }
-        
+
         img {
           width: 24px;
           height: 24px;

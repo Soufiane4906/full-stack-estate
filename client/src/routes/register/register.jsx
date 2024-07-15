@@ -26,7 +26,7 @@ function Register() {
         email,
         password,
       });
-
+debugger;
       navigate("/login");
     } catch (err) {
       setError(err.response.data.message);

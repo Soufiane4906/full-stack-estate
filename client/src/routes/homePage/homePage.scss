@@ -1,32 +1,30 @@
 @import "../../responsive.scss";
 
 .homePage {
-  display: flex;
-  height: 100%;
 
+  display: flex;
+  min-height: 50vh; /* Minimum height to cover the viewport */
   .textContainer {
     flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    height: 100%;
+
+    @include lg {
+      //padding-right: 50px;
+    }
+
+    @include md {
+      padding: 0;
+    }
+
+    @include sm {
+      justify-content: flex-start;
+    }
 
     .wrapper {
-      padding-right: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 50px;
-      height: 100%;
-
-      @include lg{
-        padding-right: 50px;
-      }
-
-      @include md{
-        padding: 0;
-      }
-
-      @include sm{
-        justify-content: flex-start;
-      }
-
       .title {
         font-size: 64px;
 
@@ -36,6 +34,9 @@
       }
 
       .boxes {
+        
+    padding-top: 37px;
+
         display: flex;
         justify-content: space-between;
 
@@ -57,6 +58,11 @@
         }
       }
     }
+
+    p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
   }
 
   .imgContainer {
@@ -71,12 +77,12 @@
     }
 
     img {
-      width: 115%;
+      width: 100%;
       position: absolute;
       right: 0;
 
       @include lg {
-        width: 105%;
+        width: 100%;
       }
     }
   }

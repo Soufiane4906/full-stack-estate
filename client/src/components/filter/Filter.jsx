@@ -5,12 +5,12 @@ import { useSearchParams } from "react-router-dom";
 function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
-    type: searchParams.get("type") || "",
+    //type: searchParams.get("type") || "",
     city: searchParams.get("city") || "",
-    property: searchParams.get("property") || "",
+    //property: searchParams.get("property") || "",
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
-    bedroom: searchParams.get("bedroom") || "",
+   // bedroom: searchParams.get("bedroom") || "",
   });
 
   const handleChange = (e) => {
@@ -42,7 +42,7 @@ function Filter() {
           />
         </div>
       </div>
-      <div className="bottom">
+      {/* <div className="bottom">
         <div className="item">
           <label htmlFor="type">Type</label>
           <select
@@ -107,7 +107,7 @@ function Filter() {
         <button onClick={handleFilter}>
           <img src="/search.png" alt="" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

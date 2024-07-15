@@ -8,9 +8,9 @@ export const getPosts = async (req, res) => {
     const posts = await prisma.post.findMany({
       where: {
         city: query.city || undefined,
-        type: query.type || undefined,
-        property: query.property || undefined,
-        bedroom: parseInt(query.bedroom) || undefined,
+       // type: query.type || undefined,
+       // property: query.property || undefined,
+       // bedroom: parseInt(query.bedroom) || undefined,
         price: {
           gte: parseInt(query.minPrice) || undefined,
           lte: parseInt(query.maxPrice) || undefined,
@@ -34,6 +34,7 @@ export const getPost = async (req, res) => {
       where: { id },
       include: {
         postDetail: true,
+
         user: {
           select: {
             username: true,
@@ -56,16 +57,18 @@ export const getPost = async (req, res) => {
               },
             },
           });
-          res.status(200).json({ ...post, isSaved: saved ? true : false });
+          return res.status(200).json({ ...post, isSaved: saved ? true : false });
         }
       });
+    } else {
+      return res.status(200).json({ ...post, isSaved: false });
     }
-    res.status(200).json({ ...post, isSaved: false });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get post" });
   }
 };
+
 
 export const addPost = async (req, res) => {
   const body = req.body;
@@ -75,18 +78,26 @@ export const addPost = async (req, res) => {
     const newPost = await prisma.post.create({
       data: {
         ...body.postData,
-        userId: tokenUserId,
-        postDetail: {
-          create: body.postDetail,
+        user: {
+          connect: {
+            id: tokenUserId
+          }
         },
+         postDetail: {
+           create: body.postDetail,
+         },
       },
     });
     res.status(200).json(newPost);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to create post" });
+    if (!res.headersSent) {
+      res.status(500).json({ message: "Failed to create post" });
+    }
   }
 };
+
+
 
 export const updatePost = async (req, res) => {
   try {

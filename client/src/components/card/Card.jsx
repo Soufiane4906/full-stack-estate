@@ -19,12 +19,12 @@ function Card({ item }) {
         <div className="bottom">
           <div className="features">
             <div className="feature">
-              <img src="/bed.png" alt="" />
-              <span>{item.bedroom} bedroom</span>
+              <img src="/eng.jpg" alt="" />
+              {/* <span>{item.bedroom} bedroom</span> */}
             </div>
             <div className="feature">
-              <img src="/bath.png" alt="" />
-              <span>{item.bathroom} bathroom</span>
+              <img src="/fr.jpg" alt="" />
+              {/* <span>{item.bathroom} bathroom</span> */}
             </div>
           </div>
           <div className="icons">
