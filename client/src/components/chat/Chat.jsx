@@ -9,7 +9,7 @@ import { useNotificationStore } from "../../lib/notificationStore";
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
   const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+ const { socket } = useContext(SocketContext);
 
   const messageEndRef = useRef();
 

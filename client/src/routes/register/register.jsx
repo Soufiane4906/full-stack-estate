@@ -47,9 +47,7 @@ debugger;
           <Link to="/login">Do you have an account?</Link>
         </form>
       </div>
-      <div className="imgContainer">
-        <img src="/bg.png" alt="" />
-      </div>
+   
     </div>
   );
 }

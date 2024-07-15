@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; // Make sure to import Link from react-router-dom
 import "./searchBar.scss";
 import { CitySelect, CountrySelect, StateSelect, LanguageSelect } from "react-country-state-city";
 import Select from "react-select";
@@ -18,6 +19,7 @@ function SearchBar() {
   const [languages, setLanguages] = useState([]);
   const [pointsOfInterest, setPointsOfInterest] = useState([]);
   const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
 
   const handleLanguageChange = (selectedOptions) => {
     setLanguages(selectedOptions ? selectedOptions.map(option => option.value) : []);
@@ -25,6 +27,20 @@ function SearchBar() {
 
   const handlePointsOfInterestChange = (selectedOptions) => {
     setPointsOfInterest(selectedOptions ? selectedOptions.map(option => option.value) : []);
+  };
+
+  // Function to construct the query string
+  const constructQuery = () => {
+    const params = new URLSearchParams();
+
+    if (countryId) params.append("countryId", countryId);
+    if (stateId) params.append("stateId", stateId);
+    if (cityId) params.append("cityId", cityId);
+    if (languages.length > 0) params.append("languages", languages.join(","));
+    if (pointsOfInterest.length > 0) params.append("pointsOfInterest", pointsOfInterest.join(","));
+    if (time) params.append("time", time);
+
+    return params.toString();
   };
 
   return (
@@ -37,7 +53,6 @@ function SearchBar() {
           onChange={(country) => {
             setCountryId(country.id);
           }}
-          placeHolder="Select Country"
           showFlag={true}
         />
       </div>
@@ -49,7 +64,6 @@ function SearchBar() {
           onChange={(state) => {
             setStateId(state.id);
           }}
-          placeHolder="Select State"
         />
       </div>
 
@@ -70,7 +84,6 @@ function SearchBar() {
         <LanguageSelect
           isMulti
           onChange={handleLanguageChange}
-          placeHolder="Select Languages"
           displayNative={true}
         />
       </div>
@@ -85,17 +98,29 @@ function SearchBar() {
         />
       </div>
 
-      <div className="form-group">
-        <h6>Preferred Time</h6>
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          placeholder="Select Time"
-        />
-      </div>
+<div className="form-group">
+  <h6>Preferred Date</h6>
+  <input
+    type="date"
+    value={date}
+    onChange={(e) => setDate(e.target.value)}
+    placeholder="Select Date"
+  />
+</div>
+<div className="form-group">
+  <h6>Preferred Time</h6>
+  <input
+    type="time"
+    value={time}
+    onChange={(e) => setTime(e.target.value)}
+    placeholder="Select Time"
+  />
+</div>
 
-      <button className="submit-btn">Find Guide</button>
+
+      <Link to={`/list?${constructQuery()}`}>
+        <button className="submit-btn">Find Guide</button>
+      </Link>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 function HomePage() {
   const { currentUser } = useContext(AuthContext);
+  
 
   return (
     <div className="homePage">
@@ -43,7 +44,7 @@ function HomePage() {
         </div>
       </div>
       <div className="imgContainer">
-        <img src="/bg.png" alt="Travel background" />
+        <img src="/bg.svg" alt="Travel background" />
       </div>
     </div>
   );

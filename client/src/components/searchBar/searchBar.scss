@@ -5,15 +5,15 @@
   max-width: 600px;
   margin: auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #51fe5a17;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   h2 {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: 'Arial', sans-serif;
-    color: #333;
+    font-family: "Lato", sans-serif;
+        color: #333;
   }
 
   .form-group {
@@ -22,8 +22,9 @@
 
   .form-group h6 {
     margin-bottom: 0.5rem;
-    font-family: 'Arial', sans-serif;
-    color: #666;
+    font-family: "Lato", sans-serif;
+    color: #000;
+    font-size: initial;
   }
 
   .select__control {
@@ -45,13 +46,21 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    color: #333;
+    color: #000000;
+  }
+  input[type="date"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #000000;
   }
 
   .submit-btn {
     width: 100%;
     padding: 0.75rem;
-    background-color: #007bff;
+    background-color: #226e26;
     color: white;
     border: none;
     border-radius: 5px;

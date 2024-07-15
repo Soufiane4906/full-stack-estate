@@ -1,16 +1,12 @@
-import Chat from "../../components/chat/Chat";
-import List from "../../components/list/List";
 import "./profilePage.scss";
-import apiRequest from "../../lib/apiRequest";
-import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
-import { Suspense, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import apiRequest from "../../lib/apiRequest";
+import Chat from "../../components/chat/Chat";
 
 function ProfilePage() {
-  const data = useLoaderData();
-
-  const { updateUser, currentUser } = useContext(AuthContext);
-
+  const { currentUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -22,6 +18,7 @@ function ProfilePage() {
       console.log(err);
     }
   };
+
   return (
     <div className="profilePage">
       <div className="details">
@@ -33,55 +30,66 @@ function ProfilePage() {
             </Link>
           </div>
           <div className="info">
-            <span>
-              Avatar:
-              <img src={currentUser.avatar || "noavatar.jpg"} alt="" />
-            </span>
-            <span>
-              Username: <b>{currentUser.username}</b>
-            </span>
-            <span>
-              E-mail: <b>{currentUser.email}</b>
-            </span>
-            <button onClick={handleLogout}>Logout</button>
+            <div className="avatar">
+              <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+            </div>
+            <div className="userDetails">
+              <div className="field">
+                <span className="label">Username:</span>
+                <span className="value">{currentUser.username}</span>
+              </div>
+              <div className="field">
+                <span className="label">E-mail:</span>
+                <span className="value">{currentUser.email}</span>
+              </div>
+              <div className="field">
+                <span className="label">Latitude:</span>
+                <span className="value">{currentUser.latitude || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Longitude:</span>
+                <span className="value">{currentUser.longitude || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Country:</span>
+                <span className="value">{currentUser.country || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">State:</span>
+                <span className="value">{currentUser.state || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">City:</span>
+                <span className="value">{currentUser.city || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Languages:</span>
+                <span className="value">{currentUser.languages.join(", ") || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Points of Interest:</span>
+                <span className="value">{currentUser.pointsOfInterest.join(", ") || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Telephone:</span>
+                <span className="value">{currentUser.telephone || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Identification Image:</span>
+                <span className="value">{currentUser.identificationImage || "N/A"}</span>
+              </div>
+              <div className="field">
+                <span className="label">Bank Account Identifier:</span>
+                <span className="value">{currentUser.bankAccountIdentifier || "N/A"}</span>
+              </div>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
           </div>
-          <div className="title">
-            <h1>My List</h1>
-            <Link to="/add">
-              <button>Create New Post</button>
-            </Link>
-          </div>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Await
-              resolve={data.postResponse}
-              errorElement={<p>Error loading posts!</p>}
-            >
-              {(postResponse) => <List posts={postResponse.data.userPosts} />}
-            </Await>
-          </Suspense>
-          <div className="title">
-            <h1>Saved List</h1>
-          </div>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Await
-              resolve={data.postResponse}
-              errorElement={<p>Error loading posts!</p>}
-            >
-              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
-            </Await>
-          </Suspense>
         </div>
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Suspense fallback={<p>Loading...</p>}>
-            <Await
-              resolve={data.chatResponse}
-              errorElement={<p>Error loading chats!</p>}
-            >
-              {(chatResponse) => <Chat chats={chatResponse.data}/>}
-            </Await>
-          </Suspense>
+          <Chat />
         </div>
       </div>
     </div>

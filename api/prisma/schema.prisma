@@ -7,54 +7,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  title            String
-  price            Int
-  images           String[]
-  address          String
-  city             String
-  latitude         String
-  longitude        String
-  createdAt        DateTime        @default(now())
-  user             User            @relation(fields: [userId], references: [id])
-  userId           String          @db.ObjectId
-  postDetail       PostDetail?
-  savedPosts       SavedPost[]
-  languages        String[]
-  pointsOfInterest String[]
-}
-
-model PostDetail {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  desc       String
-  post       Post    @relation(fields: [postId], references: [id])
-  postId     String  @unique @db.ObjectId
-}
-
-model SavedPost {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
-  userId    String   @unique @db.ObjectId
-  postId    String   @unique @db.ObjectId
-  createdAt DateTime @default(now())
-
-  @@unique([userId, postId])
-}
 
 model User {
-  id         String      @id @default(auto()) @map("_id") @db.ObjectId
-  email      String      @unique
-  username   String      @unique
-  password   String
-  avatar     String?
-  createdAt  DateTime    @default(now())
-  posts      Post[]
-  savedPosts SavedPost[]
-  chats      Chat[]      @relation(fields: [chatIDs], references: [id])
-  chatIDs    String[]    @db.ObjectId
+
+  id                  String        @id @default(auto()) @map("_id") @db.ObjectId
+  email               String        @unique
+  username            String        @unique
+  password            String
+  avatar              String?
+  createdAt           DateTime      @default(now())
+  chats               Chat[]        @relation(fields: [chatIDs], references: [id])
+  chatIDs             String[]      @db.ObjectId
+  isGuide             Boolean       @default(false)
+  isVerified          Boolean       @default(false)
+  isOnline            Boolean       @default(false)
+  isAvailable         Boolean       @default(false)
+  latitude            String?
+  longitude           String?
+  country             String?
+  state               String?
+  city                String?
+  telephone                String?
+  languages           String[]      @default([])
+  pointsOfInterest    String[]      @default([])
+  identificationImage String?       // New field for identification image
+  bankAccountIdentifier String?    // New field for bank account identifier
 }
+
+
+
 
 model Chat {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
