@@ -48,7 +48,7 @@ function SearchBar() {
       <h2>Find Your Perfect Guide</h2>
       
       <div className="form-group">
-        <h6>Choose Your Country</h6>
+        <h6>Choose Your Destination</h6>
         <CountrySelect
           onChange={(country) => {
             setCountryId(country.id);
@@ -80,7 +80,15 @@ function SearchBar() {
       </div>
 
       <div className="form-group">
-        <h6>Languages You Speak</h6>
+        <h6>Languages You Speak 1</h6>
+        <LanguageSelect
+          isMulti
+          onChange={handleLanguageChange}
+          displayNative={true}
+        />
+      </div>
+      <div className="form-group">
+        <h6>Languages You Speak 2</h6>
         <LanguageSelect
           isMulti
           onChange={handleLanguageChange}

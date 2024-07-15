@@ -38,9 +38,11 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <a href="/login">Sign in</a>
+            <a href="/login" className="register">
+              <i className="fas fa-sign-in-alt"></i> 
+            </a>
             <a href="/register" className="register">
-              Sign up
+              <i className="fas fa-user-plus"></i> 
             </a>
           </>
         )}
