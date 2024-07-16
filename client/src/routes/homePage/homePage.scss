@@ -1,48 +1,47 @@
 @import "../../responsive.scss";
 
 .homePage {
-
   display: flex;
-  min-height: 50vh; /* Minimum height to cover the viewport */
+  min-height: 100vh; // Full viewport height
+  padding: 20px;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .textContainer {
-    flex: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 50px;
-    height: 100%;
+    gap: 20px;
 
-    @include lg {
-      //padding-right: 50px;
-    }
+    .title {
+      font-size: 48px;
+      font-weight: bold;
 
-    @include md {
-      padding: 0;
-    }
-
-    @include sm {
-      justify-content: flex-start;
-    }
-
-    .wrapper {
-      .title {
-        font-size: 64px;
-
-        @include lg {
-          font-size: 48px;
-        }
+      @include lg {
+        font-size: 40px;
       }
 
-      .boxes {
-        
-    padding-top: 37px;
+      @include md {
+        font-size: 32px;
+      }
+    }
 
-        display: flex;
-        justify-content: space-between;
+    .boxes {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 20px;
 
-        @include sm {
-          display: none;
-        }
+      @include sm {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .box {
+        text-align: center;
+        flex: 1;
 
         h1 {
           font-size: 36px;
@@ -50,11 +49,35 @@
           @include lg {
             font-size: 32px;
           }
+
+          @include md {
+            font-size: 28px;
+          }
         }
 
         h2 {
           font-size: 20px;
           font-weight: 300;
+        }
+      }
+    }
+
+    .reviews {
+      margin-top: 30px;
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .review {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        margin-bottom: 10px;
+
+        p {
+          margin: 0;
         }
       }
     }
@@ -66,23 +89,49 @@
   }
 
   .imgContainer {
-    flex: 2;
     background-color: #fcf5f3;
-    position: relative;
-    display: flex;
+    flex-direction: column;
     align-items: center;
-
-    @include md {
-      display: none;
-    }
+    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     img {
       width: 100%;
-      position: absolute;
-      right: 0;
+      max-width: 100%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
 
-      @include lg {
-        width: 100%;
+    .steps {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: left;
+
+      h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 20px;
+
+          h3 {
+            color: #007bff;
+            margin-bottom: 5px;
+          }
+
+          p {
+            margin: 0;
+          }
+        }
       }
     }
   }

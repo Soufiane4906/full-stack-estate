@@ -1,65 +1,104 @@
 import { useContext, useState } from "react";
 import "./navbar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useNotificationStore } from "../../lib/notificationStore";
+import apiRequest from "../../lib/apiRequest";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignInAlt,
+  faUserPlus,
+  faSignOutAlt,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { currentUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const { currentUser } = useContext(AuthContext);
+  const handleLogout = async () => {
+    try {
+      await apiRequest.post("/auth/logout");
+      updateUser(null);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const fetch = useNotificationStore((state) => state.fetch);
   const number = useNotificationStore((state) => state.number);
 
-  if(currentUser) fetch();
+  if (currentUser) fetch();
 
   return (
-    <nav>
-      <div className="left">
-        <a href="/" className="logo">
-          <img src="/logo.png" alt="" />
-          <span>Geeders </span>
-        </a>
-        <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/">Guides</a>
-      </div>
-      <div className="right">
-        {currentUser ? (
-          <div className="user">
-            <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
-            <span>{currentUser.username}</span>
-            <Link to="/profile" className="profile">
-              {number > 0 && <div className="notification">{number}</div>}
-              <span>Profile</span>
-            </Link>
-          </div>
-        ) : (
-          <>
-            <a href="/login" className="register">
-              <i className="fas fa-sign-in-alt"></i> 
-            </a>
-            <a href="/register" className="register">
-              <i className="fas fa-user-plus"></i> 
-            </a>
-          </>
-        )}
-        <div className="menuIcon">
-          <img
-            src="/menu.png"
-            alt=""
-            onClick={() => setOpen((prev) => !prev)}
-          />
-        </div>
-        <div className={open ? "menu active" : "menu"}>
-          <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
-          <a href="/">Sign in</a>
-          <a href="/">Sign up</a>
+    <nav className="navbar navbar-expand-lg ">
+      <div className="container-fluid">
+        <Link to="/" className="navbar-brand">
+          <img src="/logo.png" alt="Logo" height="40" />
+          Geeders
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-controls="navbarNav"
+          aria-expanded={open ? "true" : "false"}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className={`collapse navbar-collapse ${open ? "show" : ""}`} id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link">About</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Contact</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Guides</Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav ms-auto">
+            {currentUser ? (
+              <>
+                <li className="nav-item">
+                  <Link to="/profile" className="nav-link">
+                    <FontAwesomeIcon icon={faUser} className="me-2" />
+                    {currentUser.username}
+                    {number > 0 && <span className="badge bg-danger ms-2">{number}</span>}
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-outline-light ms-2" onClick={handleLogout}>
+                    <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to="/login" className="btn btn-outline-light me-2">
+                    <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="btn btn-outline-light">
+                    <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
     </nav>

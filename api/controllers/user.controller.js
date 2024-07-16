@@ -11,6 +11,25 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const getGuides = async (req, res) => {
+  try {
+    const query = req.query;
+
+
+
+    const users = await prisma.user.findMany({
+      where:
+      country=query.country || undefined,
+
+    });
+debugger;
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to get guides!" });
+  }
+};
+
 export const getUser = async (req, res) => {
   const id = req.params.id;
   try {

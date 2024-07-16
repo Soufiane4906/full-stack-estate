@@ -5,34 +5,30 @@ function Card({ item }) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.images[0]} alt="" />
+        <img src={item.avatar} alt={item.username} />
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={`/${item.id}`}>{item.title}</Link>
+          <Link to={`/${item.id}`}>{item.username}</Link>
         </h2>
-        <p className="address">
-          <img src="/pin.png" alt="" />
-          <span>{item.address}</span>
+        <p className="email">
+          <img src="/email.png" alt="email" />
+          <span>{item.email}</span>
         </p>
-        <p className="price">$ {item.price}</p>
+        <p className="biographie">{item.biographie}</p>
         <div className="bottom">
           <div className="features">
             <div className="feature">
-              <img src="/eng.jpg" alt="" />
-              {/* <span>{item.bedroom} bedroom</span> */}
-            </div>
-            <div className="feature">
-              <img src="/fr.jpg" alt="" />
-              {/* <span>{item.bathroom} bathroom</span> */}
+              <img src="/language.png" alt="languages" />
+              <span>{item.languages.join(", ") || "No languages listed"}</span>
             </div>
           </div>
           <div className="icons">
             <div className="icon">
-              <img src="/save.png" alt="" />
+              <img src="/save.png" alt="save" />
             </div>
             <div className="icon">
-              <img src="/chat.png" alt="" />
+              <img src="/chat.png" alt="chat" />
             </div>
           </div>
         </div>

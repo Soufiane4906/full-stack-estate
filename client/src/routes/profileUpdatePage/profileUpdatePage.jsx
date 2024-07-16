@@ -1,14 +1,71 @@
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useContext, useState } from "react";
 import "./profileUpdatePage.scss";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import {
+  CitySelect,
+  CountrySelect,
+  StateSelect,
+  LanguageSelect,
+} from "react-country-state-city";
+import Select from "react-select";
+import "react-country-state-city/dist/react-country-state-city.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faEnvelope,
+  faLock,
+  faGlobeAmericas,
+  faPhone,
+  faImage,
+  faIdCard,
+  faBank,
+} from "@fortawesome/free-solid-svg-icons";
+import { MapContainer, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import Map from "../../components/map/Map";
 
+const pointsOfInterestOptions = [
+  { value: "museums", label: "Museums" },
+  { value: "historical_sites", label: "Historical Sites" },
+  { value: "parks", label: "Parks" },
+  { value: "restaurants", label: "Restaurants" },
+];
+const languageOptions = [
+  { value: "en", label: "English" },
+  { value: "fr", label: "French" },
+  { value: "es", label: "Spanish" },
+  { value: "de", label: "German" },
+  // Add more languages as needed
+];
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
+
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
+  const [country, setCountry] = useState({
+    id: currentUser.country,
+    name: currentUser.countryName,
+  });
+  const [state, setState] = useState({
+    id: currentUser.state,
+    name: currentUser.stateName,
+  });
+  const [city, setCity] = useState({
+    id: currentUser.city,
+    name: currentUser.cityName,
+  });
+
+  const [pointsOfInterest, setPointsOfInterest] = useState(
+    currentUser.pointsOfInterest || []
+  );
+  const [languages, setLanguages] = useState(currentUser.languages || []);
+
   const navigate = useNavigate();
 
   // Function to fetch current location coordinates
@@ -17,8 +74,8 @@ function ProfileUpdatePage() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          document.getElementById("latitude").value = latitude;
-          document.getElementById("longitude").value = longitude;
+          document.getElementsByName("latitude")[0].value = latitude;
+          document.getElementsByName("longitude")[0].value = longitude;
         },
         (error) => {
           console.error("Error fetching location:", error);
@@ -29,6 +86,18 @@ function ProfileUpdatePage() {
     }
   };
 
+  const handleLanguageChange = (selectedOptions) => {
+    setLanguages(
+      selectedOptions ? selectedOptions.map((option) => option.value) : []
+    );
+  };
+
+  const handlePointsOfInterestChange = (selectedOptions) => {
+    setPointsOfInterest(
+      selectedOptions ? selectedOptions.map((option) => option.value) : []
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -37,13 +106,9 @@ function ProfileUpdatePage() {
       username,
       email,
       password,
+      biographie,
       latitude,
       longitude,
-      country,
-      state,
-      city,
-      languages,
-      pointsOfInterest,
       telephone,
       identificationImage,
       bankAccountIdentifier,
@@ -54,22 +119,32 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
+        biographie,
         avatar: avatar[0],
         latitude,
         longitude,
-        country,
-        state,
-        city,
-        languages: languages.split(",").map((lang) => lang.trim()),
-        pointsOfInterest: pointsOfInterest
-          .split(",")
-          .map((point) => point.trim()),
+        country: country.name,
+        state: state.name,
+        city: city.name,
+        languages,
+        pointsOfInterest,
         telephone,
         identificationImage,
         bankAccountIdentifier,
       });
+      debugger;
       updateUser(res.data);
-      navigate("/profile");
+      //console user data
+      console.log(res.data);
+      const pointsOfInterestString = pointsOfInterest.join(",");
+      const url = `/list?countryName=${country.name}&stateName=${
+        state.name
+      }&cityName=${city.name}&pointsOfInterest=${encodeURIComponent(
+        pointsOfInterestString
+      )}&time=${encodeURIComponent(
+        formData.get("time")
+      )}&date=${encodeURIComponent(formData.get("date"))}`;
+      //navigate(url);
     } catch (err) {
       console.log(err);
       setError(err.response.data.message);
@@ -77,151 +152,243 @@ function ProfileUpdatePage() {
   };
 
   return (
-    <div className="profileUpdatePage">
-      <div className="formContainer">
-        <form onSubmit={handleSubmit}>
-          <h1>Update Profile</h1>
-          <div className="item">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              defaultValue={currentUser.username}
-              required
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              defaultValue={currentUser.email}
-              required
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" />
-          </div>
-          <div className="item">
-            <label htmlFor="latitude">Latitude</label>
-            <input
-              id="latitude"
-              name="latitude"
-              type="text"
-              defaultValue={currentUser.latitude || ""}
-            />
-            <button type="button" onClick={fetchCurrentLocation}>
-              Use Current Location
-            </button>
-          </div>
-          <div className="item">
-            <label htmlFor="longitude">Longitude</label>
-            <input
-              id="longitude"
-              name="longitude"
-              type="text"
-              defaultValue={currentUser.longitude || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="country">Country</label>
-            <input
-              id="country"
-              name="country"
-              type="text"
-              defaultValue={currentUser.country || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="state">State</label>
-            <input
-              id="state"
-              name="state"
-              type="text"
-              defaultValue={currentUser.state || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="city">City</label>
-            <input
-              id="city"
-              name="city"
-              type="text"
-              defaultValue={currentUser.city || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="languages">Languages (comma-separated)</label>
-            <input
-              id="languages"
-              name="languages"
-              type="text"
-              defaultValue={currentUser.languages?.join(", ") || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="pointsOfInterest">
-              Points of Interest (comma-separated)
-            </label>
-            <input
-              id="pointsOfInterest"
-              name="pointsOfInterest"
-              type="text"
-              defaultValue={currentUser.pointsOfInterest?.join(", ") || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="telephone">Telephone</label>
-            <input
-              id="telephone"
-              name="telephone"
-              type="text"
-              defaultValue={currentUser.telephone || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="identificationImage">Identification Image</label>
-            <input
-              id="identificationImage"
-              name="identificationImage"
-              type="text"
-              defaultValue={currentUser.identificationImage || ""}
-            />
-          </div>
-          <div className="item">
-            <label htmlFor="bankAccountIdentifier">
-              Bank Account Identifier
-            </label>
-            <input
-              id="bankAccountIdentifier"
-              name="bankAccountIdentifier"
-              type="text"
-              defaultValue={currentUser.bankAccountIdentifier || ""}
-            />
-          </div>
-          <button>Update</button>
-          {error && <span>{error}</span>}
-        </form>
-      </div>
-      <div className="sideContainer">
-        <img
-          src={avatar[0] || currentUser.avatar || "/noavatar.jpg"}
-          alt=""
-          className="avatar"
-        />
-        <UploadWidget
-          uwConfig={{
-            cloudName: "lamadev",
-            uploadPreset: "estate",
-            multiple: false,
-            maxImageFileSize: 2000000,
-            folder: "avatars",
-          }}
-          setState={setAvatar}
-        />
+    <div className="container profileUpdatePage">
+      <div className="row">
+        <div className="col-md-8">
+          <form onSubmit={handleSubmit}>
+            <h1>Update Profile</h1>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="username">
+                  <FontAwesomeIcon icon={faUser} /> Username
+                </label>
+                <input
+                  name="username"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.username}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="email">
+                  <FontAwesomeIcon icon={faEnvelope} /> Email
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  defaultValue={currentUser.email}
+                  required
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-12">
+                <label htmlFor="biographie">
+                  <FontAwesomeIcon icon={faImage} /> Biographie
+                </label>
+                <ReactQuill
+                  name="biographie"
+                  theme="snow"
+                  defaultValue={currentUser.biographie}
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="password">
+                  <FontAwesomeIcon icon={faLock} /> New Password
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
+              </div>
+
+              <div className="col-md-6">
+                <label htmlFor="telephone">
+                  <FontAwesomeIcon icon={faPhone} /> Telephone
+                </label>
+                <input
+                  name="telephone"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.telephone || ""}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="latitude">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Latitude
+                </label>
+                <input
+                  name="latitude"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.latitude || ""}
+                />
+                <button
+                  type="button"
+                  className="btn btn-secondary mt-2"
+                  onClick={fetchCurrentLocation}
+                >
+                  Use Current Location
+                </button>
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="longitude">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Longitude
+                </label>
+                <input
+                  name="longitude"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.longitude || ""}
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-4">
+                <label htmlFor="country">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Country
+                </label>
+                <CountrySelect
+                  onChange={(country) =>
+                    setCountry({ id: country.id, name: country.name })
+                  }
+                  placeHolder="Select Country"
+                  showFlag={true}
+                />
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="state">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> State
+                </label>
+                <StateSelect
+                  countryid={country.id}
+                  onChange={(state) =>
+                    setState({ id: state.id, name: state.name })
+                  }
+                  placeHolder="Select State"
+                />
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="city">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> City
+                </label>
+                <CitySelect
+                  countryid={country.id}
+                  stateid={state.id}
+                  onChange={(city) => setCity({ id: city.id, name: city.name })}
+                  placeHolder="Select City"
+                />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="languages">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Languages
+                </label>
+                <Select
+                  onChange={handleLanguageChange}
+                  options={languageOptions}
+                  isMulti
+                  placeholder="Select Languages"
+                  defaultValue={languages.map((poi) => ({
+                    value: poi,
+                    label: languageOptions.find(
+                      (option) => option.value === poi
+                    ).label,
+                  }))}
+                />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="pointsOfInterest">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Points of Interest
+                </label>
+                <Select
+                  isMulti
+                  options={pointsOfInterestOptions}
+                  onChange={handlePointsOfInterestChange}
+                  placeHolder="Select Points of Interest"
+                  defaultValue={pointsOfInterest.map((poi) => ({
+                    value: poi,
+                    label: pointsOfInterestOptions.find(
+                      (option) => option.value === poi
+                    ).label,
+                  }))}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="identificationImage">
+                  <FontAwesomeIcon icon={faIdCard} /> Identification Image
+                </label>
+                <UploadWidget onUpload={setAvatar} />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="bankAccountIdentifier">
+                  <FontAwesomeIcon icon={faBank} /> Bank Account Identifier
+                </label>
+                <input
+                  name="bankAccountIdentifier"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.bankAccountIdentifier || ""}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <div className="col-md-12">
+                <label htmlFor="map">
+                  <FontAwesomeIcon icon={faGlobeAmericas} /> Map
+                </label>
+                <Map
+                  items={[
+                    {
+                      id: currentUser.id,
+                      latitude: currentUser.latitude,
+                      longitude: currentUser.longitude,
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+
+            <div className="row mb-3">
+              <div className="col-md-12">
+                <button type="submit" className="btn btn-primary w-100">
+                  Update Profile
+                </button>
+              </div>
+            </div>
+            {error && <div className="alert alert-danger">{error}</div>}
+          </form>{" "}
+        </div>
+        <div className="col-md-4">
+          <img
+            src={avatar[0] || currentUser.avatar || "/noavatar.jpg"}
+            alt=""
+            className="avatar img-fluid rounded-circle"
+          />
+          <UploadWidget
+            uwConfig={{
+              cloudName: "lamadev",
+              uploadPreset: "estate",
+              multiple: false,
+              maxImageFileSize: 2000000,
+              folder: "avatars",
+            }}
+            setState={setAvatar}
+          />
+        </div>
       </div>
     </div>
   );

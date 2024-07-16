@@ -4,7 +4,7 @@
 
   .formContainer {
     flex: 3;
-    display: flex;
+    display: math;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -50,13 +50,20 @@
 
   .sideContainer {
     flex: 2;
-    background-color: #fcf5f3;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
     justify-content: center;
     padding: 20px; // Add padding as needed
+    .rounded-circle{
+      margin-top: 24%;
+    border: 3px double black;
+    border-radius: 50% !important;margin-top: 24%;
+    border: 3px double black;
+    border-radius: 50% !important;
+    }
 
     .avatar {
       width: 100%; // Adjust avatar width
@@ -65,5 +72,13 @@
       object-fit: cover;
       border-radius: 50%; // Make avatar round
     }
+  }
+}
+.map {
+  height: 400px;
+  width: 100%;
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
   }
 }

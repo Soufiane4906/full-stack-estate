@@ -1,162 +1,65 @@
-@import "../../responsive.scss";
+#root > div > div.navbar > nav > div > a
+{
+  color: yellow;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-nav {
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar {
+  background-color: rgba(97, 59, 187, 0.52) !important;
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    background-color: rgba(97, 59, 187, 0.52) !important;
+    padding: 0.5rem 1rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 
-  a {
-    transition: all 0.4s ease;
+    img {
+      margin-right: 10px;
+      background-color: yellow!important;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
 
-    @include sm {
-      display: none;
     }
+  }
+
+  .nav-link {
+    color: #ffffff;
+    &:hover {
+      color: #cccccc;
+    }
+
+    .badge {
+      font-size: 0.8em;
+      vertical-align: middle;
+    }
+  }
+
+  .btn-outline-light {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    border-color: #ffffff;
 
     &:hover {
-      scale: 1.05;
+      color: #cccccc;
+      border-color: #cccccc;
+    }
+
+    .me-2 {
+      margin-right: 5px;
     }
   }
 
-  .left {
-    flex: 3;
-    display: flex;
-    align-items: center;
-    gap: 50px;
-
-    .logo {
-      font-weight: bold;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      img {
-        width: 28px;
-      }
-
-      span {
-        @include md {
-          display: none;
-        }
-
-        @include sm {
-          display: initial;
-        }
-      }
-    }
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
   }
-  .right {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    background-color: #fcf5f3;
-    height: 100%;
 
-    @include md {
-      background-color: transparent;
-    }
-
-    a {
-      padding: 12px 24px;
-      margin: 20px;
-    }
-
-    .user{
-      display: flex;
-      align-items: center;
-      font-weight: bold;
-
-      img{
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 20px;
-      }
-
-      span{
-        @include sm{
-          display: none;
-        }
-      }
-
-      .profile{
-        padding: 12px 24px;
-        background-color: #fece51;
-        cursor: pointer;
-        border: none;
-        position: relative;
-        
-        .notification{
-          position: absolute;
-          top: -8px;
-          right: -8px;
-          background-color: red;
-          color: white;
-          border-radius: 50%;
-          width: 26px;
-          height: 26px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-      }
-    }
-
-    .register {
-      background-color: #ffffff;
-      color: black;
-      font-weight: bolder;
-    }
-    .login {
-      background-color: #ffffff;
-      color: black;
-      font-weight: bolder;
-    }
-
-
-    .menuIcon {
-      display: none;
-      z-index: 999;
-
-      img {
-        width: 36px;
-        height: 36px;
-        cursor: pointer;
-      }
-
-      @include sm {
-        display: inline;
-      }
-    }
-
-    .menu {
-      position: absolute;
-      top: 0;
-      right: -50%;
-      background-color: black;
-      color: white;
-      height: 100vh;
-      width: 50%;
-      transition: all 1s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-
-      &.active {
-        right: 0;
-      }
-
-      @include sm {
-        a {
-          display: initial;
-        }
-      }
-    }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }
 }

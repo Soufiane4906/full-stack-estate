@@ -7,43 +7,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-
-  id                  String        @id @default(auto()) @map("_id") @db.ObjectId
-  email               String        @unique
-  username            String        @unique
-  password            String
-  avatar              String?
-  createdAt           DateTime      @default(now())
-  chats               Chat[]        @relation(fields: [chatIDs], references: [id])
-  chatIDs             String[]      @db.ObjectId
-  isGuide             Boolean       @default(false)
-  isVerified          Boolean       @default(false)
-  isOnline            Boolean       @default(false)
-  isAvailable         Boolean       @default(false)
-  latitude            String?
-  longitude           String?
-  country             String?
-  state               String?
-  city                String?
-  telephone                String?
-  languages           String[]      @default([])
-  pointsOfInterest    String[]      @default([])
-  identificationImage String?       // New field for identification image
-  bankAccountIdentifier String?    // New field for bank account identifier
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  email                 String   @unique
+  username              String   @unique
+  password              String
+  avatar                String?
+  createdAt             DateTime @default(now())
+  chats                 Chat[]   @relation(fields: [chatIDs], references: [id])
+  chatIDs               String[] @db.ObjectId
+  isGuide               Boolean  @default(false)
+  isVerified            Boolean  @default(false)
+  isOnline              Boolean  @default(false)
+  isAvailable           Boolean  @default(false)
+  latitude              String?
+  longitude             String?
+  country               String?
+  state                 String?
+  city                  String?
+  biographie            String?
+  telephone             String?
+  languages             String[] @default([])
+  pointsOfInterest      String[] @default([])
+  identificationImage   String? // New field for identification image
+  bankAccountIdentifier String? // New field for bank account identifier
 }
 
-
-
-
 model Chat {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  users     User[]    @relation(fields: [userIDs], references: [id])
-  userIDs   String[]  @db.ObjectId
-  createdAt DateTime  @default(now())
-  seenBy    String[]  @db.ObjectId
-  messages  Message[]
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  users       User[]    @relation(fields: [userIDs], references: [id])
+  userIDs     String[]  @db.ObjectId
+  createdAt   DateTime  @default(now())
+  seenBy      String[]  @db.ObjectId
+  messages    Message[]
   lastMessage String?
 }
 
@@ -57,25 +53,24 @@ model Message {
 }
 
 model Country {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  cities    City[]
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String @unique
+  cities City[]
 }
 
 model City {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  country   Country  @relation(fields: [countryId], references: [id])
-  countryId String   @db.ObjectId
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String  @unique
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String  @db.ObjectId
 }
 
 model Language {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
 }
 
 model PointOfInterest {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
 }

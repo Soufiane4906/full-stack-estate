@@ -1,4 +1,5 @@
-import "./listPage.scss";
+// Frontend ListPage component
+import React from "react";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
@@ -19,8 +20,8 @@ function ListPage() {
               errorElement={<p>Error loading posts!</p>}
             >
               {(postResponse) =>
-                postResponse.data.map((post) => (
-                  <Card key={post.id} item={post} />
+                postResponse.data.map((user) => (
+                  <Card key={user.id} item={user} />
                 ))
               }
             </Await>
@@ -40,5 +41,6 @@ function ListPage() {
     </div>
   );
 }
+
 
 export default ListPage;

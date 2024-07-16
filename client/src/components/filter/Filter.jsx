@@ -5,12 +5,12 @@ import { useSearchParams } from "react-router-dom";
 function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
-    //type: searchParams.get("type") || "",
-    city: searchParams.get("city") || "",
-    //property: searchParams.get("property") || "",
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-   // bedroom: searchParams.get("bedroom") || "",
+    countryName: '',
+    stateName: '',
+    cityName: '',
+    pointsOfInterest: '',
+    time: '',
+    date: ''
   });
 
   const handleChange = (e) => {
@@ -27,87 +27,79 @@ function Filter() {
   return (
     <div className="filter">
       <h1>
-        Search results for <b>{searchParams.get("city")}</b>
+        Search results for <b>{searchParams.get("cityName")}</b>
       </h1>
       <div className="top">
         <div className="item">
-          <label htmlFor="city">Location</label>
+          <label htmlFor="countryName">Country</label>
           <input
             type="text"
-            id="city"
-            name="city"
-            placeholder="City Location"
+            id="countryName"
+            name="countryName"
+            placeholder="Country"
             onChange={handleChange}
-            defaultValue={query.city}
+            defaultValue={query.countryName}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="stateName">State</label>
+          <input
+            type="text"
+            id="stateName"
+            name="stateName"
+            placeholder="State"
+            onChange={handleChange}
+            defaultValue={query.stateName}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="cityName">City</label>
+          <input
+            type="text"
+            id="cityName"
+            name="cityName"
+            placeholder="City"
+            onChange={handleChange}
+            defaultValue={query.cityName}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="pointsOfInterest">Points of Interest</label>
+          <input
+            type="text"
+            id="pointsOfInterest"
+            name="pointsOfInterest"
+            placeholder="Points of Interest (comma separated)"
+            onChange={handleChange}
+            defaultValue={query.pointsOfInterest}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="time">Time</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            onChange={handleChange}
+            defaultValue={query.time}
+          />
+        </div>
+        <div className="item">
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            onChange={handleChange}
+            defaultValue={query.date}
           />
         </div>
       </div>
-      {/* <div className="bottom">
-        <div className="item">
-          <label htmlFor="type">Type</label>
-          <select
-            name="type"
-            id="type"
-            onChange={handleChange}
-            defaultValue={query.type}
-          >
-            <option value="">any</option>
-            <option value="buy">Buy</option>
-            <option value="rent">Rent</option>
-          </select>
-        </div>
-        <div className="item">
-          <label htmlFor="property">Property</label>
-          <select
-            name="property"
-            id="property"
-            onChange={handleChange}
-            defaultValue={query.property}
-          >
-            <option value="">any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="condo">Condo</option>
-            <option value="land">Land</option>
-          </select>
-        </div>
-        <div className="item">
-          <label htmlFor="minPrice">Min Price</label>
-          <input
-            type="number"
-            id="minPrice"
-            name="minPrice"
-            placeholder="any"
-            onChange={handleChange}
-            defaultValue={query.minPrice}
-          />
-        </div>
-        <div className="item">
-          <label htmlFor="maxPrice">Max Price</label>
-          <input
-            type="text"
-            id="maxPrice"
-            name="maxPrice"
-            placeholder="any"
-            onChange={handleChange}
-            defaultValue={query.maxPrice}
-          />
-        </div>
-        <div className="item">
-          <label htmlFor="bedroom">Bedroom</label>
-          <input
-            type="text"
-            id="bedroom"
-            name="bedroom"
-            placeholder="any"
-            onChange={handleChange}
-            defaultValue={query.bedroom}
-          />
-        </div>
+      <div className="bottom">
         <button onClick={handleFilter}>
-          <img src="/search.png" alt="" />
+          <img src="/search.png" alt="Search" />
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }
