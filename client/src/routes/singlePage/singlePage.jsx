@@ -91,8 +91,8 @@ function SinglePage() {
             </div>
           </div>
 
-    
-        
+
+
           {/* <div className="listHorizontal">
             <div className="feature">
               <img src="/school.png" alt="" />

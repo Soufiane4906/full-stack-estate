@@ -2,33 +2,45 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 // Backend route to fetch guides
+// guideController.js
+// guideController.js
+// guideController.js
 export const getGuides = async (req, res) => {
-  const query = req.query;
+  const { country, stateName, cityName, pointsOfInterest } = req.query;
+
+  // Log the query parameters for debugging
+  console.log("Query Parameters:", req.query);
+
+  // Verify the value of country
+  if (!country) {
+    return res.status(400).json({ message: "Country is required" });
+  }
 
   try {
     const posts = await prisma.user.findMany({
       where: {
-        country: query.country,
-        state: query.stateName,
-        city: query.cityName,
-        pointsOfInterest: {
-          has: query.pointsOfInterest // Assuming pointsOfInterest is an array
-        }
+        country: country || undefined,
+         state: stateName || undefined,
+         city: cityName || undefined,
+        // pointsOfInterest: pointsOfInterest ? {
+        //   hasEvery: pointsOfInterest.split(",") // Split the string into an array
+        // } : undefined
       }
     });
 
     res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Failed to get posts" });
+    console.error("Error fetching guides:", err);
+    res.status(500).json({ message: "Failed to fetch guides" });
   }
 };
+
 
 
 export const getGuide = async (req, res) => {
   const id = req.params.id;
   try {
-    const post = await prisma.post.findUnique({
+    const post = await prisma.user.findUnique({
       where: { id },
       include: {
 
@@ -41,24 +53,8 @@ export const getGuide = async (req, res) => {
       },
     });
 
-    const token = req.cookies?.token;
 
-    if (token) {
-      jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
-        if (!err) {
-          const saved = await prisma.savedPost.findUnique({
-            where: {
-              userId_postId: {
-                postId: id,
-                userId: payload.id,
-              },
-            },
-          });
-          res.status(200).json({ ...post, isSaved: saved ? true : false });
-        }
-      });
-    }
-    res.status(200).json({ ...post, isSaved: false });
+    res.status(200).json({ ...post, });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get post" });

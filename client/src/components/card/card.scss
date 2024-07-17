@@ -1,103 +1,102 @@
-@import "../../responsive.scss";
-
 .card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 20px;
+  flex-direction: column;
 
-  .imageContainer {
-    flex: 2;
+  .leftTopCorner {
+    width: 100%;
     height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
 
-    @include md {
-      display: none;
-    }
-
-    img {
+    img.avatar {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 50%;
+      border: 2px solid #555;
     }
   }
+
   .textContainer {
-    flex: 3;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
-
-    img {
-      width: 16px;
-      height: 16px;
-    }
 
     .title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #444;
-      transition: all 0.4s ease;
+      margin: 0;
+      font-size: 1.5em;
 
-      &:hover {
-        color: #000;
-        scale: 1.01;
+      a {
+        text-decoration: none;
+        color: inherit;
       }
     }
 
-    .address {
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      color: #888;
+    .details {
+      margin: 8px 0;
+
+      p {
+        margin: 4px 0;
+        font-size: 0.9em;
+      }
     }
 
-    .price {
-      font-size: 20px;
-      font-weight: 300;
-      padding: 5px;
-      border-radius: 5px;
-      background-color: rgba(254, 205, 81, 0.438);
-      width: max-content;
+    .biography {
+      margin: 8px 0;
+      font-size: 0.9em;
+      color: #555;
     }
 
     .bottom {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-
-      .features {
-        display: flex;
-        gap: 20px;
-        font-size: 14px;
-
-        .feature {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          background-color: whitesmoke;
-          padding: 5px;
-          border-radius: 5px;
-        }
-      }
+      align-items: center;
 
       .icons {
         display: flex;
-        gap: 20px;
 
         .icon {
-          border: 1px solid #999;
-          padding: 2px 5px;
-          border-radius: 5px;
+          margin-left: 8px;
           cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
 
-          &:hover {
-            background-color: lightgray;
+          img {
+            width: 24px;
+            height: 24px;
           }
         }
       }
     }
+
+    .detailsButton {
+      align-self: flex-start;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .flagIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
   }
 }

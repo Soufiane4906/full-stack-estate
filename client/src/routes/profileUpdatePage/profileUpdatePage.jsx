@@ -41,10 +41,52 @@ const languageOptions = [
   { value: "fr", label: "French" },
   { value: "es", label: "Spanish" },
   { value: "de", label: "German" },
+  { value: "it", label: "Italian" },
+  { value: "pt", label: "Portuguese" },
+  { value: "ja", label: "Japanese" },
+  { value: "ko", label: "Korean" },
+  { value: "zh", label: "Chinese" },
+  { value: "ar", label: "Arabic" },
+  { value: "hi", label: "Hindi" },
+  { value: "bn", label: "Bengali" },
+  { value: "ru", label: "Russian" },
+  { value: "tr", label: "Turkish" },
+  { value: "vi", label: "Vietnamese" },
+  { value: "ur", label: "Urdu" },
+  { value: "fa", label: "Persian" },
+  { value: "sw", label: "Swahili" },
+  { value: "nl", label: "Dutch" },
+  { value: "fi", label: "Finnish" },
+  { value: "sv", label: "Swedish" },
+  { value: "no", label: "Norwegian" },
+  { value: "da", label: "Danish" },
+  { value: "is", label: "Icelandic" },
+  { value: "pl", label: "Polish" },
+  { value: "cs", label: "Czech" },
+  { value: "hu", label: "Hungarian" },
+  { value: "ro", label: "Romanian" },
+  { value: "bg", label: "Bulgarian" },
+  { value: "el", label: "Greek" },
+  { value: "he", label: "Hebrew" },
+  { value: "ur", label: "Urdu" },
+  { value: "hi", label: "Hindi" },
+  { value: "bn", label: "Bengali" },
+  { value: "ru", label: "Russian" },
+  { value: "tr", label: "Turkish" },
+  { value: "vi", label: "Vietnamese" },
+  { value: "ur", label: "Urdu" },
+  { value: "fa", label: "Persian" },
+  { value: "sw", label: "Swahili" },
+  { value: "nl", label: "Dutch" },
+  { value: "fi", label: "Finnish" },
+  { value: "sv", label: "Swedish" },
+  { value: "no", label: "Norwegian" },
+
   // Add more languages as needed
 ];
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
+
 
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
@@ -97,7 +139,7 @@ function ProfileUpdatePage() {
       selectedOptions ? selectedOptions.map((option) => option.value) : []
     );
   };
-
+  const [value, setValue] = useState(currentUser.biographie || "");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -106,7 +148,6 @@ function ProfileUpdatePage() {
       username,
       email,
       password,
-      biographie,
       latitude,
       longitude,
       telephone,
@@ -119,7 +160,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        biographie,
+        biographie : value,
         avatar: avatar[0],
         latitude,
         longitude,
@@ -157,6 +198,7 @@ function ProfileUpdatePage() {
         <div className="col-md-8">
           <form onSubmit={handleSubmit}>
             <h1>Update Profile</h1>
+
             <div className="row mb-3">
               <div className="col-md-6">
                 <label htmlFor="username">
@@ -183,18 +225,7 @@ function ProfileUpdatePage() {
                 />
               </div>
             </div>
-            <div className="row mb-3">
-              <div className="col-md-12">
-                <label htmlFor="biographie">
-                  <FontAwesomeIcon icon={faImage} /> Biographie
-                </label>
-                <ReactQuill
-                  name="biographie"
-                  theme="snow"
-                  defaultValue={currentUser.biographie}
-                />
-              </div>
-            </div>
+
             <div className="row mb-3">
               <div className="col-md-6">
                 <label htmlFor="password">
@@ -219,7 +250,14 @@ function ProfileUpdatePage() {
                 />
               </div>
             </div>
-
+            <div className="row mb-3">
+              <div className="col-md-12">
+              <label htmlFor="biographie">Description</label>
+              <ReactQuill theme="snow" onChange={setValue} value={value}
+              defaultValue={currentUser.biographie}
+              />
+              </div>
+            </div>
             <div className="row mb-3">
               <div className="col-md-6">
                 <label htmlFor="latitude">
@@ -354,8 +392,8 @@ function ProfileUpdatePage() {
                   items={[
                     {
                       id: currentUser.id,
-                      latitude: currentUser.latitude,
-                      longitude: currentUser.longitude,
+                      latitude: currentUser.latitude || '',
+                      longitude: currentUser.longitude || '',
                     },
                   ]}
                 />

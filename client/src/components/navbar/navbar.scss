@@ -7,11 +7,12 @@
 }
 
 .navbar {
-  background-color: rgba(97, 59, 187, 0.52) !important;
+  background-color:rgb(9 6 15) !important ;
   .navbar-brand {
     display: flex;
     align-items: center;
-    background-color: rgba(97, 59, 187, 0.52) !important;
+    border: 1px solid yellow;
+    background-color: #1c1e21 !important ;
     padding: 0.5rem 1rem;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -28,9 +29,12 @@
   }
 
   .nav-link {
-    color: #ffffff;
+    color: yellow;
+    border-radius: 5%;
+    margin-right: 15px;
     &:hover {
       color: #cccccc;
+      border: 1px solid black;
     }
 
     .badge {

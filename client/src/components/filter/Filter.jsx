@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./filter.scss";
 import { useSearchParams } from "react-router-dom";
 
 function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [query, setQuery] = useState({
-    countryName: '',
+    country: '',
     stateName: '',
     cityName: '',
     pointsOfInterest: '',
     time: '',
     date: ''
   });
+
+  useEffect(() => {
+    const initialQuery = {
+      country: searchParams.get("country") || '',
+      stateName: searchParams.get("stateName") || '',
+      cityName: searchParams.get("cityName") || '',
+      pointsOfInterest: searchParams.get("pointsOfInterest") || '',
+      time: searchParams.get("time") || '',
+      date: searchParams.get("date") || ''
+    };
+    setQuery(initialQuery);
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setQuery({
@@ -21,7 +34,13 @@ function Filter() {
   };
 
   const handleFilter = () => {
-    setSearchParams(query);
+    const updatedParams = { ...query };
+    Object.keys(updatedParams).forEach(key => {
+      if (!updatedParams[key]) {
+        delete updatedParams[key];
+      }
+    });
+    setSearchParams(updatedParams);
   };
 
   return (
@@ -31,14 +50,14 @@ function Filter() {
       </h1>
       <div className="top">
         <div className="item">
-          <label htmlFor="countryName">Country</label>
+          <label htmlFor="country">Country</label>
           <input
             type="text"
-            id="countryName"
-            name="countryName"
+            id="country"
+            name="country"
             placeholder="Country"
             onChange={handleChange}
-            defaultValue={query.countryName}
+            value={query.country}
           />
         </div>
         <div className="item">
@@ -49,7 +68,7 @@ function Filter() {
             name="stateName"
             placeholder="State"
             onChange={handleChange}
-            defaultValue={query.stateName}
+            value={query.stateName}
           />
         </div>
         <div className="item">
@@ -60,7 +79,7 @@ function Filter() {
             name="cityName"
             placeholder="City"
             onChange={handleChange}
-            defaultValue={query.cityName}
+            value={query.cityName}
           />
         </div>
         <div className="item">
@@ -71,7 +90,7 @@ function Filter() {
             name="pointsOfInterest"
             placeholder="Points of Interest (comma separated)"
             onChange={handleChange}
-            defaultValue={query.pointsOfInterest}
+            value={query.pointsOfInterest}
           />
         </div>
         <div className="item">
@@ -81,7 +100,7 @@ function Filter() {
             id="time"
             name="time"
             onChange={handleChange}
-            defaultValue={query.time}
+            value={query.time}
           />
         </div>
         <div className="item">
@@ -91,7 +110,7 @@ function Filter() {
             id="date"
             name="date"
             onChange={handleChange}
-            defaultValue={query.date}
+            value={query.date}
           />
         </div>
       </div>

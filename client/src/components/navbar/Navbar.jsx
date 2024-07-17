@@ -38,7 +38,7 @@ function Navbar() {
       <div className="container-fluid">
         <Link to="/" className="navbar-brand">
           <img src="/logo.png" alt="Logo" height="40" />
-          Geeders
+          GeeDers
         </Link>
         <button
           className="navbar-toggler"

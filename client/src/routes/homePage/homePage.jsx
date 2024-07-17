@@ -10,13 +10,26 @@ function HomePage() {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <div className="homePage container-fluid">
+    <div>
+   <div className="section">
+  <div className="overlay"></div>
+  <div className="container">
+    <div className="row">
+      <div className="col-lg-12 text-center titre">
+        <h1 className="section-title">Welcome to Gee<span className="ders">Ders</span> </h1>
+        <p>
+        <span className="ders">  Your Travel Guide to </span> Discover the best guides to make your  trips unforgettable. <br/> Whether you're looking for cultural insights, adventure, or just a local companion <br />
+        <span className="ders">We connect you  </span>with the right guide for your needs.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+       <div className="homePage container-fluid">
       <div className="row ">
         <div className="col-lg-7 textContainer">
-          <h1 className="title">Find Your Perfect Travel Guide</h1>
-          <p>
-            Discover the best guides to make your trips unforgettable. Whether you're looking for cultural insights, adventure, or just a local companion, we connect you with the right guide for your needs.
-          </p>
+
           <SearchBar />
           <div className="boxes">
             <div className="box">
@@ -53,7 +66,7 @@ function HomePage() {
         <div className="col-lg-5 imgContainer">
           <img src="/bg.svg" alt="Travel background" />
           <div className="steps">
-            <h2>How to Reserve a Guide</h2>
+            <h2>Your steps to find your perfect guide</h2>
             <ul>
               <li>
                 <h3>1. Pick Your Destination</h3>
@@ -76,6 +89,8 @@ function HomePage() {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 

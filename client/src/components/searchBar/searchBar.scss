@@ -5,8 +5,8 @@
   max-width: 600px;
   margin: auto;
   padding: 2rem;
-  background-color: #51fe5a17;
-  border-radius: 10px;
+  background: repeating-linear-gradient(360deg, #fffabe, rgb(255 255 0) 97px);
+      border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   h2 {
@@ -57,16 +57,17 @@
     color: #000000;
   }
 
-  .submit-btn {
-    width: 100%;
+ .submit-btn {
+    width: 25%;
     padding: 0.75rem;
-    background-color: #226e26;
-    color: white;
+    background-color: black;
+    color: yellow;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
 
     &:hover {
       background-color: #0056b3;

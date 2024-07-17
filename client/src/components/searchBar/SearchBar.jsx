@@ -5,6 +5,8 @@ import { CitySelect, CountrySelect, StateSelect, LanguageSelect } from "react-co
 import Select from "react-select";
 import "react-country-state-city/dist/react-country-state-city.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faClock, faCalendarAlt,  faGlobeAmericas, faMapMarkerAlt, faMapMarker,faStar, faSearch, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 const pointsOfInterestOptions = [
   { value: "museums", label: "Museums" },
@@ -50,10 +52,10 @@ function SearchBar() {
 
   return (
     <div className="search-bar container">
-      <h2>Find Your Perfect Guide</h2>
+      <h2>Find Your Guide Now !</h2>
       <div className="row">
         <div className="col-md-6 form-group">
-          <h6>Choose Your Destination</h6>
+        <h6><FontAwesomeIcon icon={faMapMarkerAlt} /> Choose Your Destination</h6>
           <CountrySelect
             onChange={(country) => {
               setCountryId(country.id);
@@ -64,7 +66,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Select Your State</h6>
+          <h6> <FontAwesomeIcon icon={faMapLocationDot}/> Select Your State</h6>
           <StateSelect
             countryid={countryId}
             onChange={(state) => {
@@ -75,7 +77,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Pick Your City</h6>
+        <h6> <FontAwesomeIcon icon={faMapMarkerAlt}/>Pick Your City</h6>
           <CitySelect
             countryid={countryId}
             stateid={stateId}
@@ -88,7 +90,8 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Languages You Speak</h6>
+          <h6><FontAwesomeIcon icon={faGlobeAmericas} /> Languages You Speak
+</h6>
           <LanguageSelect
             onChange={handleLanguageChange}
             displayNative={true}
@@ -96,7 +99,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Your Points of Interest</h6>
+        <h6><FontAwesomeIcon icon={faStar} />Your Points of Interest</h6>
           <Select
             isMulti
             options={pointsOfInterestOptions}
@@ -106,7 +109,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Preferred Date</h6>
+        <h6><FontAwesomeIcon icon={faCalendarAlt} /> Preferred Date</h6>
           <input
             type="date"
             value={date}
@@ -117,7 +120,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-6 form-group">
-          <h6>Preferred Time</h6>
+        <h6><FontAwesomeIcon icon={faClock} /> Preferred Time</h6>
           <input
             type="time"
             value={time}
@@ -126,11 +129,12 @@ function SearchBar() {
             placeholder="Select Time"
           />
         </div>
+
       </div>
       <div className="row">
         <div className="col-md-12 text-center">
           <Link to={`/list?${constructQuery()}`}>
-            <button className="submit-btn btn btn-primary mt-3">Find Guide</button>
+            <button className="submit-btn btn btn-primary mt-3"> <FontAwesomeIcon icon={faSearch} /> Search</button>
           </Link>
         </div>
       </div>

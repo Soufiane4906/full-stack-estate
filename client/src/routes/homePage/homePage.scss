@@ -1,8 +1,10 @@
 @import "../../responsive.scss";
 
 .homePage {
+  background: repeating-linear-gradient(127deg, #fff, rgba(229, 203, 203, 0.2509803922) 100px);
+    margin-top: 24px;
   display: flex;
-  min-height: 100vh; // Full viewport height
+  min-height: 100vh;
   padding: 20px;
 
   .row {
@@ -109,7 +111,7 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: left;
+      text-align: center;
 
       h2 {
         margin-bottom: 20px;
@@ -136,3 +138,13 @@
     }
   }
 }
+
+
+.titre {
+  color: #f8f9fa;
+  background: repeating-linear-gradient(45deg, #000000, #33333361 100px);
+  margin-top: 169px;
+}
+  .ders{
+    color: yellow;
+  }
