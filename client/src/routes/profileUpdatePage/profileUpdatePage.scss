@@ -38,7 +38,7 @@
         padding: 15px;
         border-radius: 5px;
         border: none;
-        background-color: teal;
+        background-color: #0dcaf0;
         color: white;
         font-weight: bold;
         cursor: pointer;
@@ -94,7 +94,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(""); // Yellow overlay with 60% opacity
+    background-image: url(""); // #0dcaf0 overlay with 60% opacity
     z-index: 1;
 
   }
@@ -111,6 +111,35 @@
   }
 
   p {
-    font-size: 1.5em;
+    font-size: 24.5px  }
+}
+.profileUpdatePage {
+  margin-top: 24px;
+  min-height: 100vh;
+  padding: 20px;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
   }
+
+  .avatar {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+  }
+
+  .btn {
+    &.w-100 {
+      width: 100%;
+    }
+  }
+
+
 }

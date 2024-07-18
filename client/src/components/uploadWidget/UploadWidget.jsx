@@ -1,30 +1,9 @@
-import { createContext, useEffect, useState } from "react";
-//import style
+import { useContext } from "react";
+import { CloudinaryScriptContext } from "../CloudinaryScriptProvider/CloudinaryScriptProvider";
 import "./UploadWidget.scss";
-// Create a context to manage the script loading state
-const CloudinaryScriptContext = createContext();
 
-function UploadWidget({ uwConfig, setPublicId, setState }) {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    // Check if the script is already loaded
-    if (!loaded) {
-      const uwScript = document.getElementById("uw");
-      if (!uwScript) {
-        // If not loaded, create and load the script
-        const script = document.createElement("script");
-        script.setAttribute("async", "");
-        script.setAttribute("id", "uw");
-        script.src = "https://upload-widget.cloudinary.com/global/all.js";
-        script.addEventListener("load", () => setLoaded(true));
-        document.body.appendChild(script);
-      } else {
-        // If already loaded, update the state
-        setLoaded(true);
-      }
-    }
-  }, [loaded]);
+function UploadWidget({ uwConfig, setState }) {
+  const { loaded } = useContext(CloudinaryScriptContext);
 
   const initializeCloudinaryWidget = () => {
     if (loaded) {
@@ -33,32 +12,22 @@ function UploadWidget({ uwConfig, setPublicId, setState }) {
         (error, result) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            setState((prev) => [...prev, result.info.secure_url]);
+            setState([result.info.secure_url]);
           }
         }
       );
-
-      document.getElementById("upload_widget").addEventListener(
-        "click",
-        function () {
-          myWidget.open();
-        },
-        false
-      );
+      myWidget.open();
     }
   };
 
   return (
-    <div className="container">
-      <CloudinaryScriptContext.Provider value={{ loaded }}>
-        <button
-          id="upload_widget"
-          className="cloudinary-button center"
-          onClick={initializeCloudinaryWidget}
-        >
-          <i className="fas fa-upload" ></i> Upload
-        </button>
-      </CloudinaryScriptContext.Provider>
-    </div>
-  )}
+    <button
+      className="cloudinary-button center"
+      onClick={initializeCloudinaryWidget}
+    >
+      <i className="fas fa-upload"></i> Upload
+    </button>
+  );
+}
+
 export default UploadWidget;

@@ -21,3 +21,24 @@ body{
 .stdropdown-item {
   font-family: 'Twemoji Mozilla';
 }
+
+.stsearch-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid #212529;
+  border-radius: 5px;
+}
+.stsearch-box {
+  font-family: system-ui !important;
+  border: 1px double black;
+}
+
+#root > div > div.content > div > div.homePage.container-fluid > div.col-md-12 > div > div.search-bar.container > div > div:nth-child(5) > div{
+  border: 1px solid black;
+  padding-block-start: 2px;
+  padding: 4px;
+}
+#root > div > div.content > div > div.homePage.container-fluid > div.col-md-12 > div > div.search-bar.container > div > div:nth-child(5) > div > div{
+  border: 1px solid black;
+}

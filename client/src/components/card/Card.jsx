@@ -68,12 +68,12 @@ function Card({ item }) {
             <p><strong>State:</strong> {item.state}</p>
             <p><strong>City:</strong> {item.city}</p>
           </div>
-          <div
+          {/* <div
             className="biography"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(item.biographie),
             }}
-          ></div>
+          ></div> */}
           <div className="details">
             <p><strong>Languages:</strong> {item.languages.map(lang => (
               <img src={getLanguageFlag(lang)} alt={lang} className="flagIcon" key={lang} />

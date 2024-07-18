@@ -42,15 +42,7 @@ export const getGuide = async (req, res) => {
   try {
     const post = await prisma.user.findUnique({
       where: { id },
-      include: {
 
-        user: {
-          select: {
-            username: true,
-            avatar: true,
-          },
-        },
-      },
     });
 
 

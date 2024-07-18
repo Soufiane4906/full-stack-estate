@@ -22,7 +22,7 @@ function SearchBar() {
   const [countryName, setCountryName] = useState("");
   const [stateName, setStateName] = useState("");
   const [cityName, setCityName] = useState("");
-  const [languages, setLanguages] = useState([]);
+  const [languages, setLanguages] = useState([""]);
   const [pointsOfInterest, setPointsOfInterest] = useState([]);
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
@@ -51,33 +51,39 @@ function SearchBar() {
   };
 
   return (
+
     <div className="search-bar container">
       <h2>Find Your Guide Now !</h2>
       <div className="row">
-        <div className="col-md-6 form-group">
-        <h6><FontAwesomeIcon icon={faMapMarkerAlt} /> Choose Your Destination</h6>
+        <div className="col-md-4 form-group">
+        <h6><FontAwesomeIcon icon={faMapMarkerAlt} /> Choose The Country</h6>
           <CountrySelect
             onChange={(country) => {
               setCountryId(country.id);
               setCountryName(country.name);
             }}
             showFlag={true}
+            placeHolder="Select Country"
+
           />
         </div>
 
-        <div className="col-md-6 form-group">
-          <h6> <FontAwesomeIcon icon={faMapLocationDot}/> Select Your State</h6>
+        <div className="col-md-4 form-group">
+          <h6> <FontAwesomeIcon icon={faMapLocationDot}/> Select The  State</h6>
           <StateSelect
             countryid={countryId}
             onChange={(state) => {
               setStateId(state.id);
               setStateName(state.name);
+
             }}
+            placeHolder="Select State"
+
           />
         </div>
 
-        <div className="col-md-6 form-group">
-        <h6> <FontAwesomeIcon icon={faMapMarkerAlt}/>Pick Your City</h6>
+        <div className="col-md-4 form-group">
+        <h6> <FontAwesomeIcon icon={faMapMarkerAlt}/> Pick The City</h6>
           <CitySelect
             countryid={countryId}
             stateid={stateId}
@@ -89,26 +95,31 @@ function SearchBar() {
           />
         </div>
 
-        <div className="col-md-6 form-group">
-          <h6><FontAwesomeIcon icon={faGlobeAmericas} /> Languages You Speak
+        <div className="col-md-4 form-group">
+          <h6><FontAwesomeIcon icon={faGlobeAmericas} /> Languages You Speak ?
 </h6>
           <LanguageSelect
             onChange={handleLanguageChange}
             displayNative={true}
+
+
+
           />
         </div>
 
-        <div className="col-md-6 form-group">
-        <h6><FontAwesomeIcon icon={faStar} />Your Points of Interest</h6>
+        <div className="col-md-4 form-group">
+        <h6><FontAwesomeIcon icon={faStar} />Your Points of Interest ?</h6>
           <Select
             isMulti
             options={pointsOfInterestOptions}
             onChange={handlePointsOfInterestChange}
-            placeholder="Select Points of Interest"
+            displayNative={true}
+placeholder="Points of Interest"
+
           />
         </div>
 
-        <div className="col-md-6 form-group">
+        {/* <div className="col-md-4 form-group">
         <h6><FontAwesomeIcon icon={faCalendarAlt} /> Preferred Date</h6>
           <input
             type="date"
@@ -119,7 +130,7 @@ function SearchBar() {
           />
         </div>
 
-        <div className="col-md-6 form-group">
+        <div className="col-md-4 form-group">
         <h6><FontAwesomeIcon icon={faClock} /> Preferred Time</h6>
           <input
             type="time"
@@ -128,17 +139,16 @@ function SearchBar() {
             className="form-control"
             placeholder="Select Time"
           />
-        </div>
+        </div> */}
 
-      </div>
-      <div className="row">
-        <div className="col-md-12 text-center">
+
+        <div className="col-md-4 text-center">
           <Link to={`/list?${constructQuery()}`}>
             <button className="submit-btn btn btn-primary mt-3"> <FontAwesomeIcon icon={faSearch} /> Search</button>
           </Link>
         </div>
-      </div>
-    </div>
+      </div> </div>
+
   );
 }
 

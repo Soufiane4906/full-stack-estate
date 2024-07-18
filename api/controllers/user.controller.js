@@ -50,7 +50,7 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const id = req.params.id;
   const tokenUserId = req.userId;
-  const { password, avatar, userDetails, ...inputs } = req.body;
+  const { password, avatar, identificationImage, userDetails, ...inputs } = req.body;
 
   if (id !== tokenUserId) {
     return res.status(403).json({ message: "Not Authorized!" });
@@ -81,6 +81,7 @@ export const updateUser = async (req, res) => {
       ...inputs,
       ...(updatedPassword && { password: updatedPassword }),
       ...(avatar && { avatar }),
+      ...(identificationImage && { identificationImage }),
     };
 
     const updatedUser = await prisma.user.update({
