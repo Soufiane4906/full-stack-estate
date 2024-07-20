@@ -3,13 +3,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./routes/listPage/listPage";
 import { Layout, RequireAuth } from "./routes/layout/layout";
 import SinglePage from "./routes/singlePage/singlePage";
+import Payment from "./routes/payment/payment";
 import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe("pk_test_51OtdAyGmXNQGydzP913niVXoymwGsHLrlllPlvqx2fcP96HMGtgp8vHs4wTPuvXtl5yD9SEBjAI6EjrEJIjdCjuh00GtozZgkO");
 function App() {
   const router = createBrowserRouter([
     {
@@ -19,6 +23,11 @@ function App() {
         {
           path: "/",
           element: <HomePage />,
+        },
+        //stripe page route
+        {
+          path: "/checkout",
+          element: <Payment />,
         },
         {
           path: "/list",
@@ -34,6 +43,9 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+
         },
         {
           path: "/register",
@@ -58,11 +70,15 @@ function App() {
           path: "/add",
           element: <NewPostPage />,
         },
+
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
-}
+  return (
+    <Elements stripe={stripePromise}>
+      <RouterProvider router={router} />
+    </Elements>
+  );}
 
 export default App;

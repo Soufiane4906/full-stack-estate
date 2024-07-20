@@ -8,33 +8,47 @@ datasource db {
 }
 
 model User {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
-  email                 String   @unique
-  username              String   @unique
-  password              String
-  avatar                String?
-  createdAt             DateTime @default(now())
-  chats                 Chat[]   @relation(fields: [chatIDs], references: [id])
-  chatIDs               String[] @db.ObjectId
-  isGuide               Boolean  @default(false)
-  isVerified            Boolean  @default(false)
-  isOnline              Boolean  @default(false)
-  isAvailable           Boolean  @default(false)
-  latitude              String?
-  longitude             String?
-  country               String?
-  state                 String?
-  city                  String?
-  biographie            String?
-  telephone             String?
-  languages             String[] @default([])
-  pointsOfInterest      String[] @default([])
-  identificationImage   String? // New field for identification image
-  identificationImageR  String?
-  bankAccountIdentifier String? // New field for bank account identifier
-  price                 Float?   @default(0)
-  rating                Float?   @default(0)
-  reviews               Review[]
+  id                     String        @id @default(auto()) @map("_id") @db.ObjectId
+  email                  String        @unique
+  username               String        @unique
+  password               String
+  avatar                 String?
+  createdAt              DateTime      @default(now())
+  chats                  Chat[]        @relation(fields: [chatIDs], references: [id])
+  chatIDs                String[]      @db.ObjectId
+  isGuide                Boolean       @default(false)
+  isVerified             Boolean       @default(false)
+  isOnline               Boolean       @default(false)
+  isAvailable            Boolean       @default(false)
+  latitude               String?
+  longitude              String?
+  country                String?
+  state                  String?
+  city                   String?
+  biography              String?
+  telephone              String?
+  languages              String[]      @default([])
+  pointsOfInterest       String[]      @default([])
+  identificationImage    String? // New field for identification image
+  identificationImageR   String?
+  bankAccountIdentifier  String? // New field for bank account identifier
+  price                  Float?        @default(0)
+  rating                 Float?        @default(0)
+  reviews                Review[]
+  reservationsAsCustomer Reservation[] @relation(name: "CustomerReservations")
+  reservationsAsGuide    Reservation[] @relation(name: "GuideReservations")
+}
+
+model Reservation {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  customerId String   @db.ObjectId
+  guideId    String   @db.ObjectId
+  startDate  DateTime
+  endDate    DateTime
+  // Add other fields as needed
+  // Relationships
+  customer   User     @relation(name: "CustomerReservations", fields: [customerId], references: [id])
+  guide      User     @relation(name: "GuideReservations", fields: [guideId], references: [id])
 }
 
 model Review {

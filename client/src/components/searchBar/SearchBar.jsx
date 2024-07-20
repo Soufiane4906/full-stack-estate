@@ -6,7 +6,7 @@ import Select from "react-select";
 import "react-country-state-city/dist/react-country-state-city.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faClock, faCalendarAlt,  faGlobeAmericas, faMapMarkerAlt, faMapMarker,faStar, faSearch, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import {  faClock, faCalendarAlt,  faGlobeAmericas, faMapMarkerAlt, faMapMarker,faStar, faSearch, faMapLocationDot, faMapLocation, faMapMarked } from '@fortawesome/free-solid-svg-icons';
 
 const pointsOfInterestOptions = [
   { value: "museums", label: "Museums" },
@@ -53,10 +53,10 @@ function SearchBar() {
   return (
 
     <div className="search-bar container">
-      <h2>Find Your Guide Now !</h2>
+      <h2>Find Your Guide <span className="ders">Now !</span></h2>
       <div className="row">
         <div className="col-md-4 form-group">
-        <h6><FontAwesomeIcon icon={faMapMarkerAlt} /> Choose The Country</h6>
+        <h6><FontAwesomeIcon icon={faMapLocationDot} /> Choose The Country</h6>
           <CountrySelect
             onChange={(country) => {
               setCountryId(country.id);
@@ -69,7 +69,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-4 form-group">
-          <h6> <FontAwesomeIcon icon={faMapLocationDot}/> Select The  State</h6>
+          <h6> <FontAwesomeIcon icon={faMapLocation}/> Select The  State</h6>
           <StateSelect
             countryid={countryId}
             onChange={(state) => {
@@ -96,7 +96,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-4 form-group">
-          <h6><FontAwesomeIcon icon={faGlobeAmericas} /> Languages You Speak ?
+          <h6><FontAwesomeIcon icon={faGlobeAmericas} /> Languages You Speak
 </h6>
           <LanguageSelect
             onChange={handleLanguageChange}
@@ -108,7 +108,7 @@ function SearchBar() {
         </div>
 
         <div className="col-md-4 form-group">
-        <h6><FontAwesomeIcon icon={faStar} />Your Points of Interest ?</h6>
+        <h6><FontAwesomeIcon icon={faStar} /> Points of Interest  </h6>
           <Select
             isMulti
             options={pointsOfInterestOptions}

@@ -1,18 +1,17 @@
 @import "../../responsive.scss";
 
 .layout {
-  height: 100vh;
-  max-width: 1366px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  background: black;
-
+  // height: 100vh;
+  // max-width: 1366px;
+  // width: 100%;
+  // margin-left: auto;
+  // margin-right: auto;
+  // padding-left: 20px;
+  // padding-right: 20px;
+  // display: flex;
+  // flex-direction: column;
+  // overflow-y: auto;
+  // background: rgb(255, 255, 255);
 
   @include lg {
   // background-color: rgb(247, 210, 196);
@@ -27,22 +26,26 @@
   @include sm {
   //   background-color: rgb(239, 200, 200);
     max-width: 640px;
+
+  overflow-x: hidden !important;
+
   }
 .navbar{
   width: 100%;
 }
   .content {
     // flex: 1;
-    height: calc(100vh - 100px);
+    // height: calc(100vh - 100px);
     //scroll
   }
 }
 
 #root > div > div.content > div > div.section > div.container > div > div > img{
-  border: 1px solid #0dcaf0;
+  padding: 3px;
+  border: 5px solid #000000;
   margin-right: 5px;
-  border-color: #0dcaf03d;
-  background-color: azure;
+  border-color: #fff3cd;
+  background-color: #fff3cd;
   border-top-left-radius: 107%;
   border-top-right-radius: 118%;
   margin-block-start: 20px;

@@ -4,7 +4,7 @@
   //background: rgb(195, 195, 227);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 80vh;
   --bs-gutter-x: 0rem !important;
 
   .row {
@@ -13,11 +13,10 @@
   }
 
   .textContainer {
-    background: #eaf0f2;
-            display: flex;
+    background: #ffffff;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 3px;
 
     .title {
       font-size: 48px;
@@ -37,9 +36,9 @@
       justify-content: space-between;
       padding-block-start: 43px;
       padding-block-end: 31px;
-      background-color: #010e11;
-      color: #0dcaf0;
-      margin-block-end: 4%;
+      background-color: #121f34;
+      color: #ffffff;
+      margin-block-end: 2rem;
 
 
       .box {
@@ -66,34 +65,47 @@
     }
 
     .reviews {
-      margin-top: 0px;
-      background-color: black;
-color: #0dcaf0;
-text-align: center;
-margin-block-start: 40px;
+      margin-top: 26px;
+      float: inline-end;
+      padding: 35px;
+      background-color: #121f34;
+      color: #5bf2fd;
+      text-align: center;
+      margin-block-start: 40px;
+      margin-block-end: 2%;
 
       h2 {
-        color: #f9feff;
-    font-size: 24px;
-    margin-bottom: 2%;
-    margin-top: 7%;
-    border: 2px double #f9feff;
-    padding: 42px
+        background: #121f34;
+        color: #ffffff;
+        font-size: 24px;
+        margin-bottom: 2%;
+        border-radius: 25px;
+        margin-top: 0%;
+       // border: 2px double #fff3cd;
+        padding: 42px var(--bs-border-radius-2xl);
       }
 
       .review {
         display: flex;
         align-items: center;
-        font-size: 16px;
+        font-size: 13px;
         margin-bottom: 10px;
         text-align: center;
         margin-block-start: 40px;
+        font-family: Nunito, sans-serif ;
+        font-weight: bolder;
+
         p {
+          background: #121f34;
+          font-family: Nunito, sans-serif;
           margin: 0;
-         // border: 1px solid blanchedalmond;
+          font-size: 1.4rem;
           color: #fff;
           border-radius: 22px;
           padding: 11px;
+          border:  2px solid #ffffff;
+          border-radius: 25px 0px 27px 22px;
+
         }
       }
     }
@@ -137,9 +149,15 @@ margin-block-start: 40px;
       ul {
         list-style: none;
         padding: 0;
+        margin-top: 0;
+    margin-bottom: 1rem;
+    list-style: none;
 
         li {
           margin-bottom: 20px;
+          margin-top: 0;
+    margin-bottom: 1rem;
+    list-style: none;
 
           h3 {
             color: #0dcaf0;
@@ -168,12 +186,14 @@ margin-block-start: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .titre {
-  color: #0dcaf0;
+  color: #ffffff;
   background: repeating-linear-gradient(179deg, #000000, rgba(51, 51, 51, 0.3803921569) 100px);
   margin-top: 169px;
 }
   .ders{
-    color: #0dcaf0;
+    // text-decoration-color: #fcf5f3 !important;
+    // text-decoration: overline;
+    color: #fff3cd;
   }
   .arrowdown{
     color: #007fff;
@@ -182,13 +202,67 @@ margin-block-start: 40px;
   margin-right: 5px;
 
 }
+#root > div > div.content > div > div.section-why > div > div > div > div > div > div > h2{
+  background: #121f34;
+  /* color: #fff3cd; */
+  font-size: xx-large;
+  margin-bottom: 2%;
+  margin-inline-end: 17%;
+  margin-inline-start: 17%;
+  border-radius: 25px;
+  margin-top: 3%;
+  border: 2px double #ffffff;
+  padding: 42px var(--bs-border-radius-2xl);
+}
+#root > div > div.content > div > div.section-why > div > div:nth-child(2) > div > h2{
+  background: #121f34;
+  /* color: #fff3cd; */
+  font-size: xx-large;
+  margin-bottom: 2%;
+  margin-inline-end: 17%;
+  margin-inline-start: 17%;
+  border-radius: 25px;
+  margin-top: 3%;
+  border: 2px double #ffffff;
+  padding: 42px var(--bs-border-radius-2xl);
+}
+#root > div > div.content > div > div.section-why > div > div:nth-child(1) {
+  background: #121f34;
+    color: aliceblue;
+    .h2 {
+      text-align: center;
 
+      }
+
+}
+#root > div > div.content > div > div.section-why > div > div:nth-child(1) > div > div > div:nth-child(2) > div> div > svg{
+  font-size: xxx-large;
+  margin-block-start: 2%;
+  margin-block-end: 2%;
+}
+#root > div > div.content > div > div.section-why > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div{
+  margin-block-end: 35px;
+
+}
+
+#root > div > div.content > div > div.section-why > div > div:nth-child(2) {
+  background: #121f34;
+
+    color: aliceblue;
+    text-align: center;
+
+   .h2 {
+    text-align: center;
+    }
+
+}
 .star{
   color: yellow;
 }
 .avt{
-  width: 12%;
-  border-radius: 81px
+  border: 1px solid #ffc107;
+  width: 17%;
+  border-radius: 81px;
 }
 #root > div > div.content > div > div.section > div.container > div > div > h1{
   --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
@@ -366,5 +440,12 @@ margin-block-start: 40px;
   color: #0dcaf0;
   font-size: 20px;
   font-weight: 600;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Nunito, sans-serif;
+}
+#root > div > div.content > div > div.section3 > div > div:nth-child(2) > div > div > img{
+  width: 100%;
+  height: 100%;
+}
+#root > div > div.content > div > div.section-why{
+  text-align: center;
 }

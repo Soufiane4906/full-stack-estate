@@ -3,25 +3,30 @@
 
 .search-bar {
 
-  border: 1px solid rgba(0, 0, 0, 0.438);
-  margin: 26px;
-  padding: 2rem;
-  background: #cdffff47;
-  border-radius: 10px;
-  box-shadow: 0px 0px 16px 5px rgba(183, 243, 255, 0.3019607843);
+  border: 1px solid rgba(33, 37, 41, 0.368627451);
+  margin: 60px;
+  margin-block-start: 3%;
+  padding: 56px;
+  background: #e1ded6;
+  border-radius: 13px;
+  box-shadow: 0px 0px 20px 20px rgba(255, 243, 205, 0);
+
+  .ders2 {
+    color: #0dcaf0 !important;
+  }
 
   h2 {
-    border: 10px solid;
-    border-color: #212529ed;
+    border: 3px solid;
+    border-color: #fff3cd;
     padding: 26px;
-    border-radius: 28px;
-    background: #000000;
+    border-radius: 18px;
+    background: #000;
     text-align: center;
-    margin-bottom: 2rem;
-    font-family: "Lato", sans-serif;
-    color: #cdffff;
-    margin-inline-end: 3%;
-    margin-inline-start: 3%;
+    margin-bottom: 1rem;
+    font-family: Nunito, sans-serif;
+    color: #ffffff;
+    margin-inline-end: 28%;
+    margin-inline-start: 28%;
   }
 
   .form-group {
@@ -30,10 +35,11 @@
 
   .form-group h6 {
     margin-bottom: 0.5rem;
-    font-family: "Lato", sans-serif;
+    font-family: Nunito, sans-serif;
     color: #000;
     font-size: larger;
-    text-align: center; }
+    text-align: center;
+    font-weight: 700; }
 
   .select__control {
     border-radius: 5px;
@@ -66,19 +72,17 @@
   }
 
  .submit-btn {
-  font-family: 'Lato';
-  font-size: large;
-  border-block-color: white;
-  width: 63%;
-  padding: 17px;
-  background-color: black;
-  color: #cdffff;
-  border: 2px solid #fff;
-  border-radius: 49px;
-  font-size: large;
+  font-family: Nunito, sans-serif;
+  width: 60%;
+  padding: 11px;
+  background-color: #000000;
+  color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 1.5rem !important;
+  font-weight: bold;
 
     &:hover {
       background-color: #0056b3;
