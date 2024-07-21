@@ -70,8 +70,8 @@ function SinglePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="singlePage">
-      <div className="details">
+    <div className="singlePage container">
+      <div className="details container ">
         <div className="wrapper">
         <p className="title">Guide Profile</p>
 
@@ -92,7 +92,7 @@ function SinglePage() {
 
               <div className="buttons">
 
-              <button onClick={handleStripePayment}>
+              <button className="btn btn-submit btn-primary mt-4" onClick={handleStripePayment}>
 
                   Pay Now
                 </button>
@@ -103,7 +103,7 @@ function SinglePage() {
               <p><strong>Biography:</strong></p>
               <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(guide.biographie) }} />
             </div>
-            <div className="details">
+            <div className="details col-md-6">
               <p><strong>Country:</strong> {guide.country}</p>
               <p><strong>State:</strong> {guide.state}</p>
               <p><strong>City:</strong> {guide.city}</p>
@@ -111,10 +111,12 @@ function SinglePage() {
               <img src={getLanguageFlag(lang)} alt={lang} className="flagIcon" key={lang} />
             ))}</p>  <p><strong>Points of Interest:</strong> {guide.pointsOfInterest.join(", ") || "No points of interest listed"}</p>
             </div>
+            
+
           </div>
         </div>
       </div>
-      <div className="features">
+      <div className="features container ">
         <div className="wrapper">
           <p className="title">Location</p>
           <div className="mapContainer">

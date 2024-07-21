@@ -6,13 +6,13 @@
 
   @include md {
     flex-direction: column;
-    overflow: scroll;
+    // overflow: scroll;
   }
 
   .details {
     flex: 3;
     height: 100%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
 
     @include md {
       flex: none;
@@ -112,7 +112,7 @@
     flex: 3;
     background-color: #ffffff;
     height: 100%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
 
     @include md {
       flex: none;
@@ -229,4 +229,11 @@
   width: 6%;
   height: 6%;
   margin-right: 2px;
+}
+.price{
+  color: green;
+}
+
+#root > div > div.content > div > div.details.container > div > div > div.top > div.guide > div > img{
+  width: 14%;
 }

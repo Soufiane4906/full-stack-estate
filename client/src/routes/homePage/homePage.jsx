@@ -280,38 +280,42 @@ function HomePage() {
       <br />
 
       <div className="footer">
-       
-          <div className="row">
-            <div className="col-lg-4">
-              <h3>About Us</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                pharetra justo vel sapien vehicula tincidunt. Nulla facilisi.
-                Nunc consectetur, libero vitae ullamcorper sollicitudin, eros
-                arcu vestibulum ipsum, sed tempor augue sem eu dui.
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <h3>Quick Links</h3>
-              <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Services</li>
-                <li>Guides</li>
-                <li>Contact</li>
-              </ul>
-            </div>
-            <div className="col-lg-4">
-              <h3>Contact Us</h3>
-              <p>
-                123 Main Street <br />
-                New York, NY 10001 <br />
-                (555) 555-5555 <br />
-                <a href="mailto:info@company.com">info@company.com</a>
-              </p>
-            </div>
-          </div>
-        </div>
+  <div className="row">
+    <div className="col-lg-6">
+      <h3>Quick Links</h3>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Services</li>
+        <li>Guides</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+    <div className="col-lg-6">
+      <h3>Contact Us</h3>
+      <p>
+        123 Main Street <br />
+        New York, NY 10001 <br />
+        (555) 555-5555 <br />
+        <a href="mailto:guiders.info@gmail.com">guiders.info@gmail.com</a>
+      </p>
+      <div className="social-media">
+        <a href="https://facebook.com"><i className="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com"><i className="fab fa-twitter"></i></a>
+        <a href="https://instagram.com"><i className="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div className="newsletter">
+    <h3>Newsletter</h3>
+    <p>Subscribe to our newsletter to get the latest updates:</p>
+    <form>
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+
 
     </div>
   );

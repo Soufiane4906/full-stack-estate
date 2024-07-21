@@ -10,11 +10,12 @@ function ListPage() {
   const data = useLoaderData();
 
   return (
-    <div className="listPage">
+    <div className="listPage container">
       <div className="listContainer">
         <div className="wrapper">
           <Filter />
-          <Suspense fallback={<p>Loading...</p>}>
+          <div className="row">
+                <Suspense fallback={<p>Loading...</p>}>
             <Await
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
@@ -26,6 +27,8 @@ function ListPage() {
               }
             </Await>
           </Suspense>
+          </div>
+
         </div>
       </div>
       <div className="mapContainer">

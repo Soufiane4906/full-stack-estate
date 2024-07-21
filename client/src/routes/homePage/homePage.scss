@@ -449,3 +449,103 @@
 #root > div > div.content > div > div.section-why{
   text-align: center;
 }
+.footer {
+  background: linear-gradient(45deg, yellow, blue);
+  color: white;
+  padding: 40px;
+  text-align: center;
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .col-lg-6 {
+      flex: 1 1 45%;
+      margin: 10px;
+
+      h3 {
+        margin-bottom: 10px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 5px;
+        }
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .social-media {
+        margin-top: 10px;
+
+        a {
+          color: white;
+          margin-right: 10px;
+          font-size: 1.5em;
+
+          &:hover {
+            color: lightgray;
+          }
+        }
+      }
+    }
+  }
+
+  .newsletter {
+    margin-top: 20px;
+    text-align: center;
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+
+      input[type="email"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        width: 250px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: white;
+        color: blue;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: lightgray;
+        }
+      }
+    }
+  }
+}

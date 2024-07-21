@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import UploadWidget  from "../../components/uploadWidget/UploadWidget";
 import CloudinaryScriptProvider from "../../components/CloudinaryScriptProvider/CloudinaryScriptProvider";
 
+import {  faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import {
   CitySelect,
@@ -23,6 +24,7 @@ import {
   faUser,
   faEnvelope,
   faLock,
+  faDollarSign ,
   faGlobeAmericas,
   faPhone,
   faImage,
@@ -90,7 +92,7 @@ const languageOptions = [
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
 
-
+  const [editLocation, setEditLocation] = useState(false);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
   const [identificationImage, setidentificationImage] = useState([]);
@@ -98,6 +100,8 @@ function ProfileUpdatePage() {
     id: currentUser.country,
     name: currentUser.countryName,
   });
+
+
   const [state, setState] = useState({
     id: currentUser.state,
     name: currentUser.stateName,
@@ -156,6 +160,7 @@ function ProfileUpdatePage() {
       longitude,
       telephone,
       bankAccountIdentifier,
+      price,
     } = Object.fromEntries(formData);
 
     try {
@@ -163,19 +168,19 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        biographie : value,
+        biographie: value,
         avatar: avatar[0],
         latitude,
         longitude,
         country: country.name,
         state: state.name,
         city: city.name,
-        identificationImage : identificationImage[0],
+        identificationImage: identificationImage[0],
         languages,
         pointsOfInterest,
         telephone,
-
         bankAccountIdentifier,
+        price: parseFloat(price),
       });
       debugger;
       updateUser(res.data);
@@ -190,6 +195,9 @@ function ProfileUpdatePage() {
       console.log(err);
       setError(err.response.data.message);
     }
+  };
+  const handleEditLocation = () => {
+    setEditLocation(!editLocation);
   };
 
   return (
@@ -335,14 +343,31 @@ function ProfileUpdatePage() {
           </div>
 
           <div className="row mb-3">
+          <div className="locationDetails">
+      <h3>Location Details</h3>
+      <div className="details">
+        <p>
+          <FontAwesomeIcon icon={faGlobeAmericas} /> Country: {currentUser.country || 'N/A'}
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faGlobeAmericas} /> State: {currentUser.state || 'N/A'}
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faGlobeAmericas} /> City: {currentUser.city || 'N/A'}
+        </p>
+      </div>
+      <button className="editButton" onClick={handleEditLocation}>
+        <FontAwesomeIcon icon={faEdit} /> Modify Location
+      </button>
+      {editLocation && (
+        <div className="locationForm">
+          <div className="row">
             <div className="col-md-4">
               <label htmlFor="country">
                 <FontAwesomeIcon icon={faGlobeAmericas} /> Country
               </label>
               <CountrySelect
-                onChange={(country) =>
-                  setCountry({ id: country.id, name: country.name })
-                }
+                onChange={(country) => setCountry({ id: country.id, name: country.name })}
                 placeHolder="Select Country"
                 showFlag={true}
               />
@@ -353,9 +378,7 @@ function ProfileUpdatePage() {
               </label>
               <StateSelect
                 countryid={country.id}
-                onChange={(state) =>
-                  setState({ id: state.id, name: state.name })
-                }
+                onChange={(state) => setState({ id: state.id, name: state.name })}
                 placeHolder="Select State"
               />
             </div>
@@ -370,6 +393,10 @@ function ProfileUpdatePage() {
                 placeHolder="Select City"
               />
             </div>
+          </div>
+        </div>
+      )}
+    </div>
           </div>
 
           <div className="row mb-3">
@@ -406,6 +433,33 @@ function ProfileUpdatePage() {
                 }))}
               />
             </div>
+          </div>
+          <div className="row-mb-3">
+            <div className="col-md-6">
+              <label htmlFor="bankAccountIdentifier">
+                <FontAwesomeIcon icon={faBank} /> Bank Account Identifier
+              </label>
+              <input
+                name="bankAccountIdentifier"
+                type="text"
+                className="form-control"
+                defaultValue={currentUser.bankAccountIdentifier || ""}
+              />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="price">
+                <FontAwesomeIcon icon={faDollarSign} /> Select your price/hour
+              </label>
+              <div className="inputGroup">
+              <input
+                  name="price"
+                  type="text"
+                  className="form-control"
+                  defaultValue={currentUser.price || ""}
+                />
+</div>
+            </div>
+
           </div>
 
           <div className="row mb-3">

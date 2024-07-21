@@ -74,19 +74,23 @@ function ProfilePage() {
                 <span className="label">Telephone:</span>
                 <span className="value">{currentUser.telephone || "N/A"}</span>
               </div>
-              <div className="field">
+              {/* <div className="field">
                 <span className="label">Identification Image:</span>
                 <span className="value">{currentUser.identificationImage || "N/A"}</span>
               </div>
               <div className="field">
                 <span className="label">Avatar Image:</span>
                 <span className="value">{currentUser.avatar || "N/A"}</span>
-              </div>
+              </div> */}
               <div className="field">
                 <span className="label">Bank Account Identifier:</span>
                 <span className="value">{currentUser.bankAccountIdentifier || "N/A"}</span>
               </div>
-              <button onClick={handleLogout}>Logout</button>
+              <div className="field">
+                <span className="label">Selected Price:</span>
+                <span className="value green ">{currentUser.price + "$" || "N/A"}</span>
+              </div>
+              {/* <button onClick={handleLogout}>Logout</button> */}
             </div>
           </div>
         </div>

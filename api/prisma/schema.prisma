@@ -25,7 +25,7 @@ model User {
   country                String?
   state                  String?
   city                   String?
-  biography              String?
+  biographie             String?
   telephone              String?
   languages              String[]      @default([])
   pointsOfInterest       String[]      @default([])

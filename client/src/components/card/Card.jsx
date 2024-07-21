@@ -80,6 +80,7 @@ function Card({ item }) {
             ))}</p>
             <p><strong>Points of Interest:</strong> {item.pointsOfInterest.join(", ") || "No points of interest listed"}</p>
           </div>
+          <p> <strong>Price :</strong> <span className="green"> {item.price}$ /hour </span></p>
           <div className="bottom">
             <div className="icons">
               <div className="icon">
@@ -90,9 +91,9 @@ function Card({ item }) {
               </div>
             </div>
           </div>
-          <button onClick={() => navigate(`/${item.id}`)} className="detailsButton">
-            Go to Guide Details
-          </button>
+          <Link to={`/${item.id}`} className="detailsButton">
+        Go to Guide Details
+      </Link>
         </div>
       </div>
     );
